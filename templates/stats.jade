@@ -1,0 +1,26 @@
+extends layout
+
+block content
+	h1.text-center NYQUIST
+	h4.text-center Round !{round}
+	hr
+
+	h3.text-center Stats
+	table.table.table-bordered(style='width: 50%; margin: auto')
+		tbody
+			tr
+				td Completed
+				td !{completed}
+			tr
+				td Not completed
+				td !{not_completed}
+
+	hr
+
+	h3.text-center People who've not completed
+	.text-center
+		table.table.table-bordered(style='width: 50%; margin: auto')
+			tbody
+				each m in list
+					tr
+						td !{m}

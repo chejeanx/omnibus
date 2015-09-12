@@ -1,0 +1,12 @@
+extends layout
+
+block content
+
+	h2.text-center !{title}
+	h5.text-center !{desc}
+
+	p.text-center
+		if (go_back)
+			h3.bg-danger.text-center| <a href="javascript:history.back()">Go Back</a>
+		else
+			h3.bg-success.text-center Thank you!

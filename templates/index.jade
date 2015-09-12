@@ -1,0 +1,29 @@
+extends layout
+
+block content
+	h1.text-center NYQUIST
+	h4.text-center BVW Survey Tool
+
+	hr
+
+	h3.bg-primary.text-center Survey active for: 
+		strong Round !{round}
+
+	hr
+
+	if (flash != '')
+		div.alert.alert-error
+			p.text-center.bg-danger !{flash}
+
+	.text-center
+		form.form-inline(role='form', method='post', action='/login')
+			.form-group
+				label.sr-only(for='andrew_id') Andrew ID
+				input.form-control(type='text', id='andrew_id', name='andrew_id', placeholder='Enter Andrew ID')
+				input.hide.form-control(type='password', id='survey_key', name='survey_key', placeholder='Survey Key', value="abc")
+			//- p
+			//- .form-group
+			//- 	label.sr-only(for='survey_key') Survey Key
+			//- 	input.form-control(type='password', id='survey_key', name='survey_key', placeholder='Survey Key')
+			p
+			button.btn.btn-primary(type='submit', value='send') Submit
