@@ -1,6 +1,6 @@
 {
-  "name": "nyquist",
-  "version": "0.0.0",
+  "name": "omnibus",
+  "version": "0.1.0",
   "description": "bvw post round feedback survey tool",
   "main": "index.js",
   "dependencies": {

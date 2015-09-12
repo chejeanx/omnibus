@@ -8,19 +8,27 @@ block content
 
 	p Please rank your teammates from most "xyz" to least "xyz"
 
-	p Eg: "Hours worked": "Most hours worked ([1]) to least hours worked ([3] or [4])"
+	p E.g.: "Hours worked": Most hours worked ([1]) to least hours worked ([3] or [4])
 
 	form.text-center(role='form', method='post', action='/survey', id='survey_form')
 
 		- var question_no = 1
-		- var level = [1, 2, 3, 4]
-		if (team.length == 4)
-			- level.pop()
+		//- var count = 1
+		//- var teamsize = team.length-1
+		//- var teammates = []
+		//while (teamsize > 0)
+		//	- teammates.push(count)
+		//	- count++
+		//	- teamsize--
+		//- var level = [1, 2, 3, 4]
+		//if (team.length == 4)
+		//	- level.pop()
+
 		each q in questions
 			hr
 			h3.text-center !{question_no}. !{q}
-			each l in level
-				p.text-center [!{l}]
+			each t in teammates
+				p.text-center [!{t}]
 					- var qid = "q_" + question_no
 					select(name=qid, form='survey_form')
 						each m in team

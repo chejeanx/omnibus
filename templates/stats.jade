@@ -1,7 +1,7 @@
 extends layout
 
 block content
-	h1.text-center NYQUIST
+	h1.text-center OMNIBUS
 	h4.text-center Round !{round}
 	hr
 
@@ -9,11 +9,17 @@ block content
 	table.table.table-bordered(style='width: 50%; margin: auto')
 		tbody
 			tr
+				td !{total}
+				td Rankings
+				td Written
+			tr
 				td Completed
-				td !{completed}
+				td !{completed_rankings}
+				td !{completed_written}
 			tr
 				td Not completed
-				td !{not_completed}
+				td !{not_completed_rankings}
+				td !{not_completed_written}
 
 	hr
 
@@ -21,6 +27,10 @@ block content
 	.text-center
 		table.table.table-bordered(style='width: 50%; margin: auto')
 			tbody
-				each m in list
+				each m in nc_rankings_list
 					tr
 						td !{m}
+
+	br
+	br
+	p.text-center OMNIBUS is based on the NYQUIST survey tool by Prajwal Manjunath ('15)
