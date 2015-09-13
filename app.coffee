@@ -47,7 +47,7 @@ app.set 'view engine', 'jade'
 
 app.engine 'jade', require('jade').__express
 
-app.use session secret: 'omelette du frumage'
+app.use session secret: 'omelette du fromage'
 app.use passport.initialize()
 app.use passport.session()
 app.use flash()
@@ -201,30 +201,22 @@ app.get '/survey2', (req, res) ->
 app.post '/survey2', (req, res) ->
 	resp = req.body
 	react = {}
-	if JSON.stringify(resp).indexOf(placeholder) > -1
+	vals = _(resp).values()
+	if !(_(vals).has "")
 		react =
 			title: 'Incomplete'
 			desc: 'Your submission was incomplete. Please answer all questions fully. Go back to try again.'
 			go_back: true
 	else
-		vals = _(resp).values()
-		test = _(vals).some (r) ->
-			r.length > _(r).uniq().length
-		if test
-			react =
-				title: 'Duplicate'
-				desc: 'Your submission contained incorrect entries. Some question had the same person at two different ratings. Go back to try again.'
-				go_back: true
+		filename = "./r#{round}_responses_written/#{req.user.username}.json"
+		fs.writeFileSync filename, JSON.stringify resp
+		if !fs.existsSync "./r#{round}_responses_rankings/#{req.user.username}.json"
+			res.redirect '/survey'
 		else
-			filename = "./r#{round}_responses_written/#{req.user.username}.json"
-			fs.writeFileSync filename, JSON.stringify resp
-			if !fs.existsSync "./r#{round}_responses_rankings/#{req.user.username}.json"
-				res.redirect '/survey'
-			else
-				react =
-					title: 'Success!'
-					desc: 'Your submission has been recorded.'
-					go_back: false
+			react =
+				title: 'Success!'
+				desc: 'Your submission has been recorded.'
+				go_back: false
 	res.render 'result', react
 
 # END NEW CODE FOR WRITTEN FEEDBACK
