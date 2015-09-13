@@ -165,9 +165,16 @@ app.get '/survey2', (req, res) ->
 		req.flash 'error', 'Please log in with your survey key'
 		res.redirect '/'
 	else if fs.existsSync "./r#{round}_responses_written/#{req.user.username}.json"
-		req.flash 'error', 'Your response for this round was already recorded. Please contact SUPPORT if you would like to edit your response.'
-		req.logout()
-		res.redirect '/'
+		if fs.existsSync "./r#{round}_responses_rankings/#{req.user.username}.json"
+			react =
+					title: 'Success!'
+					desc: 'Your submission has been recorded.'
+					go_back: false
+			res.render 'result', react
+			#return
+		#req.flash 'error', 'Your response for this round was already recorded. Please contact SUPPORT if you would like to edit your response.'
+		#req.logout()
+		#res.redirect '/'
 	else	
 		team = []
 		for t in teams
@@ -211,10 +218,13 @@ app.post '/survey2', (req, res) ->
 		else
 			filename = "./r#{round}_responses_written/#{req.user.username}.json"
 			fs.writeFileSync filename, JSON.stringify resp
-			react =
-				title: 'Success!'
-				desc: 'Your submission was recorded.'
-				go_back: false
+			if !fs.existsSync "./r#{round}_responses_rankings/#{req.user.username}.json"
+				res.redirect '/survey'
+			else
+				react =
+					title: 'Success!'
+					desc: 'Your submission has been recorded.'
+					go_back: false
 	res.render 'result', react
 
 # END NEW CODE FOR WRITTEN FEEDBACK

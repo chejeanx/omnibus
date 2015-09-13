@@ -23,9 +23,9 @@ block content
 
 				- var i = 1
 				while (i <= 3)
-					p.text-center [!{i}]
+					p.text-center [!{i}] 
 						- var qid = "q_" + question_no + "_" + m
-						textarea(name=qid, placeholder='Type your anonymous peer evaluation', cols='100', rows='6')
+						textarea(name=qid, placeholder='Type your anonymous peer evaluation', rows='6', style='width: 95%')
 					- i++
 				- question_no++
 		hr

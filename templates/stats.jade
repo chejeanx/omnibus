@@ -24,13 +24,17 @@ block content
 	hr
 
 	h3.text-center People who've not completed
-	.text-center
-		table.table.table-bordered(style='width: 50%; margin: auto')
-			tbody
-				each m in nc_rankings_list
-					tr
-						td !{m}
-
+	table.table.table-bordered(style='width: 50%; margin: auto')
+		tbody
+			tr
+				td Rankings
+				td Written
+			tr
+				td
+					!{nc_rankings_list}
+				td
+					!{nc_written_list}
+					
 	br
 	br
 	p.text-center OMNIBUS is based on the NYQUIST survey tool by Prajwal Manjunath ('15)

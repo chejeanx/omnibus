@@ -13,22 +13,12 @@ block content
 	form.text-center(role='form', method='post', action='/survey', id='survey_form')
 
 		- var question_no = 1
-		//- var count = 1
-		//- var teamsize = team.length-1
-		//- var teammates = []
-		//while (teamsize > 0)
-		//	- teammates.push(count)
-		//	- count++
-		//	- teamsize--
-		//- var level = [1, 2, 3, 4]
-		//if (team.length == 4)
-		//	- level.pop()
 
 		each q in questions
 			hr
 			h3.text-center !{question_no}. !{q}
 			each t in teammates
-				p.text-center [!{t}]
+				p.text-center [!{t}] 
 					- var qid = "q_" + question_no
 					select(name=qid, form='survey_form')
 						each m in team
