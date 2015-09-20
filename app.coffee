@@ -201,8 +201,7 @@ app.get '/survey2', (req, res) ->
 app.post '/survey2', (req, res) ->
 	resp = req.body
 	react = {}
-	vals = _(resp).values()
-	if !(_(vals).has "")
+	if JSON.stringify(resp).indexOf("\"\"") > -1
 		react =
 			title: 'Incomplete'
 			desc: 'Your submission was incomplete. Please answer all questions fully. Go back to try again.'
