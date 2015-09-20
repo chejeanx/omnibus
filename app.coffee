@@ -156,7 +156,8 @@ app.post '/survey', (req, res) ->
 		else
 			filename = "./r#{round}_responses_rankings/#{req.user.username}.json"
 			fs.writeFileSync filename, JSON.stringify resp
-	res.redirect '/survey2'
+			res.redirect '/survey2'
+	res.render 'result', react	
   
 # START NEW CODE FOR WRITTEN FEEDBACK
 
@@ -171,10 +172,6 @@ app.get '/survey2', (req, res) ->
 					desc: 'Your submission has been recorded.'
 					go_back: false
 			res.render 'result', react
-			#return
-		#req.flash 'error', 'Your response for this round was already recorded. Please contact SUPPORT if you would like to edit your response.'
-		#req.logout()
-		#res.redirect '/'
 	else	
 		team = []
 		for t in teams
